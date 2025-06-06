@@ -29,6 +29,11 @@ public class ProductService {
         return productRepository.save(product);
     }
 
+    public Optional<Product> update(Product product){
+        return getProduct(product.getProductId())
+                .map(productExist -> productRepository.save(product));
+    }
+
     public boolean delete(int productId){
         return getProduct(productId).map(product -> {
             productRepository.delete(productId);
